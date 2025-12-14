@@ -15,16 +15,16 @@ NC='\033[0m'
 
 echo -e "${YELLOW}=== AionixOne Setup ===${NC}"
 
-# 检查二进制
+# Check binary
 if [ ! -f "$SERVER" ]; then
     echo -e "${RED}Error: bin/aionix-server not found${NC}"
     exit 1
 fi
 
-# 创建数据目录
+# Create data directory
 mkdir -p "$DATA_DIR"
 
-# 停止现有服务
+# Stop existing server
 pkill -f "$SERVER" 2>/dev/null || true
 sleep 1
 
@@ -51,7 +51,7 @@ if [ -z "$API_KEY" ]; then
     exit 1
 fi
 
-# 保存配置
+# Save config
 cat > "$CONFIG_FILE" << EOF
 # AionixOne Environment
 export AIONIX_API_KEY="$API_KEY"
