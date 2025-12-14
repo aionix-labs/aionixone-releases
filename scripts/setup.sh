@@ -32,8 +32,8 @@ sleep 1
 echo -e "${YELLOW}Creating admin API key...${NC}"
 OUTPUT=$("$SERVER" --bootstrap-admin admin --data-path "$DATA_DIR" 2>&1 || true)
 
-# Extract API key (format: ak_XXXX_XXXX_XXXX)
-API_KEY=$(echo "$OUTPUT" | grep -oE "ak_[A-Za-z0-9_]{30,}" | head -1)
+# Extract API key (format: ak_XXXX_XXXX-XXXX)
+API_KEY=$(echo "$OUTPUT" | grep -oE "ak_[A-Za-z0-9_-]{30,}" | head -1)
 
 if [ -z "$API_KEY" ]; then
     if [ -f "$CONFIG_FILE" ]; then
