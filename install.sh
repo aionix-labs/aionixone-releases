@@ -50,9 +50,9 @@ echo -e "${YELLOW}Platform: $PLATFORM${NC}"
 echo -e "${YELLOW}Install directory: $INSTALL_DIR${NC}"
 echo ""
 
-# Get latest release
+# Get latest release (including pre-releases)
 echo -e "${YELLOW}Fetching latest release...${NC}"
-LATEST=$(curl -s "https://api.github.com/repos/$REPO/releases/latest" | grep '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/')
+LATEST=$(curl -s "https://api.github.com/repos/$REPO/releases" | grep '"tag_name"' | head -1 | sed -E 's/.*"([^"]+)".*/\1/')
 
 if [ -z "$LATEST" ]; then
     echo -e "${RED}Error: Could not determine latest version${NC}"
