@@ -131,8 +131,8 @@ rm -rf data .env .pid
 
 ## Links
 
+- [Documentation](https://docs.aionixone.com/)
 - [Source Code](https://github.com/aionixone/aionixone-platform) (Private)
-- [Documentation](https://github.com/aionix-labs/aionixone-releases/wiki)
 
 ## License
 
