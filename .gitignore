@@ -1,0 +1,13 @@
+# Build artifacts
+*.tar.gz
+dist/
+
+# Runtime files
+.env
+.pid
+data/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
