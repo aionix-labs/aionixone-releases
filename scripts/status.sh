@@ -15,14 +15,14 @@ NC='\033[0m'
 echo "=== AionixOne Status ==="
 echo ""
 
-# 检查进程
+# Check process
 if [ -f "$PID_FILE" ] && kill -0 "$(cat "$PID_FILE")" 2>/dev/null; then
     echo -e "Process: ${GREEN}Running${NC} (PID: $(cat "$PID_FILE"))"
 else
     echo -e "Process: ${RED}Stopped${NC}"
 fi
 
-# 检查健康
+# Check health
 if curl -s http://localhost:53000/health > /dev/null 2>&1; then
     echo -e "Health:  ${GREEN}OK${NC}"
     echo "URL:     http://localhost:53000"
@@ -30,7 +30,7 @@ else
     echo -e "Health:  ${RED}Unavailable${NC}"
 fi
 
-# 显示最近日志
+# Show recent logs
 if [ -f "$LOG_FILE" ]; then
     echo ""
     echo "=== Recent Logs ==="

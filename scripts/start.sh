@@ -14,28 +14,28 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
-# 检查是否已运行
+# Check if already running
 if [ -f "$PID_FILE" ] && kill -0 "$(cat "$PID_FILE")" 2>/dev/null; then
     echo -e "${YELLOW}Server already running (PID: $(cat "$PID_FILE"))${NC}"
     exit 0
 fi
 
-# 检查二进制
+# Check binary
 if [ ! -f "$SERVER" ]; then
     echo -e "${RED}Error: bin/aionix-server not found${NC}"
     exit 1
 fi
 
-# 确保数据目录存在
+# Ensure data directory exists
 mkdir -p "$DATA_DIR"
 
 echo -e "${YELLOW}Starting AionixOne server...${NC}"
 
-# 启动服务器
+# Start server
 "$SERVER" --data-path "$DATA_DIR" > "$LOG_FILE" 2>&1 &
 echo $! > "$PID_FILE"
 
-# 等待启动
+# Wait for startup
 for i in {1..15}; do
     if curl -s http://localhost:53000/health > /dev/null 2>&1; then
         echo -e "${GREEN}Server started!${NC}"
