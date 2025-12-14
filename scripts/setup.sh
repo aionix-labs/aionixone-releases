@@ -56,7 +56,7 @@ cat > "$CONFIG_FILE" << EOF
 # AionixOne Environment
 export AIONIX_API_KEY="$API_KEY"
 export AIONIX_URL="http://localhost:53000"
-export PATH="\$PATH:$DIR/bin"
+export PATH="$DIR/bin:\$PATH"
 EOF
 
 echo -e "${GREEN}Setup complete!${NC}"
