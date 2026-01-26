@@ -44,6 +44,9 @@ aio act delete <type>/<name> [--force]
 aio act execute <type>/<name> [-d '<input>']
 ```
 
+> Note: If `-d` is omitted, `aio act execute` reads stdin and will wait for input.
+> Use `-d '{}'` for empty input.
+
 ## Connector Types
 
 | Type | Use Case |

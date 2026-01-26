@@ -2,10 +2,26 @@
   "type": "function",
   "function": {
     "name": "openai_images_generate",
-    "description": "Generate images.",
+    "description": "Generate images from a prompt.",
     "parameters": {
       "type": "object",
-      "properties": {}
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "Image model id (e.g., gpt-image-1)."
+        },
+        "prompt": {
+          "type": "string",
+          "description": "Text prompt for the image."
+        },
+        "size": {
+          "type": "string",
+          "description": "Image size (e.g., 1024x1024)."
+        }
+      },
+      "required": [
+        "prompt"
+      ]
     }
   }
 }

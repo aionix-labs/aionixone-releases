@@ -8,14 +8,12 @@ echo ""
 # Resolve CLI path and script directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CLI=${CLI:-aio}
-if ! command -v "$CLI" >/dev/null 2>&1; then
+CLI_PATH=$(command -v "$CLI" 2>/dev/null || true)
+if [ -z "$CLI_PATH" ]; then
     echo "❌ aio not found in PATH"
     exit 1
 fi
-if [ ! -f "$CLI" ]; then
-    echo "❌ CLI not found at $CLI"
-    exit 1
-fi
+CLI="$CLI_PATH"
 
 # Ensure server is running
 AIONIX_API_BASE="${AIONIX_API_BASE:-http://127.0.0.1:53000}"

@@ -1,6 +1,7 @@
 # Build artifacts
 *.tar.gz
 dist/
+artifacts/
 
 # Runtime files
 .env

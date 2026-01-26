@@ -10,6 +10,8 @@ PID_FILE="${AIONIX_PID_FILE:-$BASE_DIR/aio.pid}"
 ENV_FILE="${AIONIX_ENV_FILE:-$BASE_DIR/env}"
 PORT="${AIONIX_PORT:-53000}"
 AIO_BIN="${AIO_BIN:-aio}"
+AGENT_SESSION_STORE="${AIONIX_AGENT_SESSION_STORE:-jsonl}"
+AGENT_SESSION_DIR="${AIONIX_AGENT_SESSION_DIR:-$DATA_DIR/agent-session}"
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -45,6 +47,8 @@ echo -e "${YELLOW}Starting AionixOne server...${NC}"
 
 # Start server
 AIONIX_API_KEY="$AIONIX_API_KEY" \
+AIONIX_AGENT_SESSION_STORE="$AGENT_SESSION_STORE" \
+AIONIX_AGENT_SESSION_DIR="$AGENT_SESSION_DIR" \
 "$AIO_BIN" server --db-mode sqlite --data-path "$DATA_DIR" --port "$PORT" > "$LOG_FILE" 2>&1 &
 echo $! > "$PID_FILE"
 

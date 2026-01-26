@@ -55,12 +55,40 @@ If `aio` is not found:
 export PATH="$HOME/.local/bin:$PATH"
 ```
 
+## Agent Sessions (Multi-turn + Logs)
+
+Use `--thread-mode create` to start a multi-turn session and `--thread-mode resume`
+with the returned `thread_id` to continue it.
+
+```bash
+# Start a thread and get thread_id
+aio agent chat \
+  --model gpt-4o-mini \
+  --message "hello" \
+  --thread-mode create
+
+# Resume the same thread
+aio agent chat \
+  --model gpt-4o-mini \
+  --message "follow up" \
+  --thread-mode resume \
+  --thread-id "<thread_id>"
+```
+
+When `AIONIX_AGENT_SESSION_STORE=jsonl` (default in `scripts/start.sh`), logs are
+written to:
+
+```
+~/.aionixone/data/agent-session/<tenant>/<thread_id>.jsonl
+```
+
 ## Install Location
 
 Default install paths (override via env vars):
 
 - Binary: `~/.local/bin/aio` (`AIONIX_INSTALL_BIN_DIR`)
 - Data: `~/.aionixone/data` (`AIONIX_DATA_DIR`)
+ - Agent sessions (jsonl): `~/.aionixone/data/agent-session` (`AIONIX_AGENT_SESSION_DIR`)
 
 ## Start the server
 
@@ -141,6 +169,11 @@ actionhub/
 - 1GB disk space
 
 ## Troubleshooting
+
+### CLI appears to hang
+
+`aio act execute` reads stdin when `-d` is omitted. If it looks stuck, pass
+`-d '{}'` (or pipe input) to send an empty payload.
 
 ### macOS Security Warning
 
