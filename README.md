@@ -2,6 +2,29 @@
 
 Official community binary releases for AionixOne (single-binary aio).
 
+## What is AionixOne
+
+AionixOne is a local-first automation platform that bundles workflow
+orchestration (Stepflow), action execution (OpenAct), serverless functions
+(AionixFn), and an agent runtime behind one CLI and one server.
+
+```mermaid
+flowchart LR
+  A[aio CLI] --> B[AionixOne Server]
+  A --> C[Agent Runtime]
+
+  B --> D[Stepflow]
+  B --> E[OpenAct]
+  B --> F[AionixFn]
+  B --> G[Igniter]
+  B --> H[ParamStore]
+  B --> I[CredVault]
+  B --> J[Ingress]
+
+  C --> E
+  C --> F
+```
+
 ## Quick Install
 
 ### macOS (Apple Silicon)
