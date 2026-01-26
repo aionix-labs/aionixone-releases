@@ -208,6 +208,40 @@ actionhub/
   function-samples/
 ```
 
+## ActionHub
+
+ActionHub is the packaging format for reusable integrations: connections,
+actions, tools, skills, and function bundles that can be installed into your
+local AionixOne server. It is how examples ship OpenAI tools or sample
+functions without manual setup.
+
+Key concepts:
+
+- Package: a directory with `manifest.yaml` plus actions/tools/skills.
+- Install: `aio hub install <path>` imports resources into your server.
+- Verify: packages can declare a verify action/function to confirm installation.
+
+Basic usage:
+
+```bash
+# Install a package from this repo
+aio hub install ./actionhub/function-samples --yes
+
+# Install OpenAI tools (requires a CredVault secret)
+aio sec create openai/api-key -t apiKey --value '{"apiKey":"<OPENAI_API_KEY>"}'
+aio hub install ./actionhub/openai --yes
+```
+
+After install, you can run:
+
+```bash
+# Invoke a sample function
+aio fn invoke hello-python -d '{"name":"ActionHub"}'
+
+# Execute a tool-backed action
+aio act execute http/openai/models/list -d '{}'
+```
+
 ## Requirements
 
 - macOS 12+ (Apple Silicon) or Linux (x86_64)
