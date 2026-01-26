@@ -251,6 +251,13 @@ aio fn invoke hello-python -d '{"name":"ActionHub"}'
 aio act execute http/openai/models/list -d '{}'
 ```
 
+LLM routing requires a model -> action mapping (one-time setup):
+
+```bash
+aio agent llm map set gpt-4o-mini \
+  --action trn:openact:default:action/http/openai/chat/completions:execute
+```
+
 Minimal OpenAI setup (no YAML required):
 
 ```bash
