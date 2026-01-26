@@ -6,7 +6,9 @@ Official community binary releases for AionixOne (single-binary aio).
 
 AionixOne is a local-first automation platform that bundles workflow
 orchestration (Stepflow), action execution (OpenAct), serverless functions
-(AionixFn), and an agent runtime behind one CLI and one server.
+(AionixFn), and an agent runtime behind one CLI and one server. It can be used
+as an agent builder by packaging tools, skills, and execution flows into
+reusable, easy-to-distribute bundles.
 
 ```mermaid
 flowchart LR
@@ -47,6 +49,9 @@ flowchart LR
   AionixFn --> ParamStore
   Agent --> ParamStore
 ```
+
+Agent resolves tools and parameters via the execution bus and resolvers, not by
+directly reading storage.
 
 ## Quick Install
 
@@ -155,7 +160,8 @@ aio status
 ## Server
 
 - **URL**: http://localhost:53000
-- **Health Check**: http://localhost:53000/health
+- **Health Check**: http://localhost:53000/health (process liveness)
+- **Readiness**: http://localhost:53000/ready (dependency readiness)
 
 ## Optional helper scripts
 
@@ -187,6 +193,9 @@ This is the free Community Edition:
 | Distributed runners | Disabled |
 
 See full details in [COMMUNITY_LIMITS.md](COMMUNITY_LIMITS.md).
+
+Community is intended for local exploration and demos. You can run multiple
+instances if needed.
 
 ## Examples
 
@@ -242,6 +251,14 @@ aio fn invoke hello-python -d '{"name":"ActionHub"}'
 aio act execute http/openai/models/list -d '{}'
 ```
 
+Minimal OpenAI setup (no YAML required):
+
+```bash
+aio sec create openai/api-key -t apiKey --value '{"apiKey":"<OPENAI_API_KEY>"}'
+aio hub install ./actionhub/openai --yes
+aio agent chat --model gpt-4o-mini --message "hello"
+```
+
 ## Requirements
 
 - macOS 12+ (Apple Silicon) or Linux (x86_64)
@@ -249,6 +266,11 @@ aio act execute http/openai/models/list -d '{}'
 - 1GB disk space
 
 ## Troubleshooting
+
+### Community license warning
+
+If you see a license warning on startup, it's safe to ignore in Community
+Edition.
 
 ## Uninstall
 
