@@ -216,6 +216,17 @@ actionhub/
 
 ## Troubleshooting
 
+## Uninstall
+
+```bash
+./uninstall.sh
+```
+
+Flags:
+- `--yes` skip confirmation
+- `--keep-data` preserve `~/.aionixone`
+- `--remove-path` remove PATH entries from shell rc files
+
 ### CLI appears to hang
 
 `aio act execute` reads stdin when `-d` is omitted. If it looks stuck, pass
