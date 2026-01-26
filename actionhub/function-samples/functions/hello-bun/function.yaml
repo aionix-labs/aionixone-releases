@@ -1,0 +1,6 @@
+name: hello-bun
+runtime: bun
+handler: index:main
+description: Simple Bun hello function
+memory: 128
+timeout: 30

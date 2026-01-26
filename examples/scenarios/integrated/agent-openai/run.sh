@@ -135,7 +135,8 @@ REQUEST_JSON=$(cat <<EOF
 EOF
 )
 
-curl -s http://${AIONIX_HOST}:${AIONIX_PORT}/v1/chat/completions \
+API_BASE="${AIONIX_API_BASE:-http://127.0.0.1:53000}"
+curl -s "${API_BASE%/}/v1/chat/completions" \
   -H "Authorization: Bearer ${AIONIX_API_KEY}" \
   -H "Content-Type: application/json" \
   -H "x-aionix-tenant: default" \

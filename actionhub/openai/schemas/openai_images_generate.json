@@ -1,0 +1,11 @@
+{
+  "type": "function",
+  "function": {
+    "name": "openai_images_generate",
+    "description": "Generate images.",
+    "parameters": {
+      "type": "object",
+      "properties": {}
+    }
+  }
+}

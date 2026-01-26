@@ -126,6 +126,14 @@ examples/
   scripts/
 ```
 
+ActionHub packages used by examples live under `actionhub/`:
+
+```
+actionhub/
+  openai/
+  function-samples/
+```
+
 ## Requirements
 
 - macOS 12+ (Apple Silicon) or Linux (x86_64)

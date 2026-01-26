@@ -1,0 +1,11 @@
+{
+  "type": "function",
+  "function": {
+    "name": "openai_embeddings",
+    "description": "Create embeddings.",
+    "parameters": {
+      "type": "object",
+      "properties": {}
+    }
+  }
+}

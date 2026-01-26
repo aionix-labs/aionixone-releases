@@ -22,7 +22,7 @@ Each subdirectory demonstrates one paramstore operation pattern.
 
 ## Prerequisites
 
-- [x] aionix-server running (port 53000)
+- [x] server running (port 53000)
 - [x] `aio` CLI installed and configured
 
 ## Quick Start

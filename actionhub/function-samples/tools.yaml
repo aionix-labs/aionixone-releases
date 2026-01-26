@@ -1,0 +1,4 @@
+tools:
+  - name: hello_python
+    action: trn:aionixfn:default:function/hello-python:invoke
+    schema: schemas/hello_python.json

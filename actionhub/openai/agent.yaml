@@ -1,0 +1,9 @@
+agent:
+  name: openai-agent
+  model: gpt-4o-mini
+  description: Use OpenAI tools for chat completions, embeddings, and image generation.
+  llm_action: trn:openact:default:action/http/openai/chat/completions:execute
+  toolsets:
+    - openai
+  skills:
+    - openai-basics

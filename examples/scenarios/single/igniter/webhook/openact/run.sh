@@ -66,7 +66,8 @@ if [ -z "${AIONIX_API_KEY:-}" ]; then
 fi
 
 info "Firing webhook"
-RESPONSE=$(curl -s -X POST "http://${AIONIX_HOST}:${AIONIX_PORT}${WEBHOOK_URL}" \
+API_BASE="${AIONIX_API_BASE:-http://127.0.0.1:53000}"
+RESPONSE=$(curl -s -X POST "${API_BASE%/}${WEBHOOK_URL}" \
   -H "Content-Type: application/json" \
   -H "X-API-Key: $AIONIX_API_KEY" \
   -d '{"message":"hello"}' 2>&1)

@@ -1,0 +1,17 @@
+{
+  "type": "function",
+  "function": {
+    "name": "hello_python",
+    "description": "Return a greeting message.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name to greet"
+        }
+      },
+      "required": ["name"]
+    }
+  }
+}

@@ -1,0 +1,18 @@
+kind: action/http
+metadata:
+  name: openai/chat/completions
+  description: Create a chat completion (non-stream).
+spec:
+  connection: openai
+  method: POST
+  path: /v1/chat/completions
+  requestBody:
+    required: true
+    content:
+      application/json: {}
+  response:
+    content:
+      application/json: {}
+    headers: {}
+    successCodes:
+      - 200

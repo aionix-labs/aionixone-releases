@@ -1,0 +1,11 @@
+{
+  "type": "function",
+  "function": {
+    "name": "openai_chat_completions",
+    "description": "Create a chat completion (non-stream).",
+    "parameters": {
+      "type": "object",
+      "properties": {}
+    }
+  }
+}

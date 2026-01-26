@@ -1,0 +1,13 @@
+tools:
+- name: openai_chat_completions
+  action: trn:openact:default:action/http/openai/chat/completions:execute
+  schema: schemas/openai_chat_completions.json
+- name: openai_embeddings
+  action: trn:openact:default:action/http/openai/embeddings:execute
+  schema: schemas/openai_embeddings.json
+- name: openai_images_generate
+  action: trn:openact:default:action/http/openai/images/generate:execute
+  schema: schemas/openai_images_generate.json
+- name: openai_models_list
+  action: trn:openact:default:action/http/openai/models/list:execute
+  schema: schemas/openai_models_list.json

@@ -1,0 +1,16 @@
+name: openai
+version: '0.1'
+secrets:
+- openai/api-key
+connections:
+- openai
+actions:
+- openai/chat/completions
+- openai/embeddings
+- openai/images/generate
+- openai/models/list
+toolsets:
+  recommended:
+  - openai
+verify:
+  action: openai/models/list

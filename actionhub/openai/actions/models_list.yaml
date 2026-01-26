@@ -1,0 +1,14 @@
+kind: action/http
+metadata:
+  name: openai/models/list
+  description: List available models.
+spec:
+  connection: openai
+  method: GET
+  path: /v1/models
+  response:
+    content:
+      application/json: {}
+    headers: {}
+    successCodes:
+      - 200

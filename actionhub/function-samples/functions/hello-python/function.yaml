@@ -1,0 +1,6 @@
+name: hello-python
+runtime: python3.11
+handler: handler:main
+description: Simple Python hello function
+memory: 128
+timeout: 30

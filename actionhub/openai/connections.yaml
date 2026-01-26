@@ -1,0 +1,11 @@
+kind: connection/http
+metadata:
+  name: openai
+  description: OpenAI API connection.
+spec:
+  baseUrl: https://api.openai.com
+  headers:
+    Authorization: '{% ''Bearer '' & $secret(''openai/api-key'').apiKey %}'
+    Content-Type: application/json
+    Accept: application/json
+  credentialTrn: trn:credvault:default:credential/apiKey/openai/api-key

@@ -1,0 +1,18 @@
+kind: action/http
+metadata:
+  name: openai/embeddings
+  description: Create embeddings.
+spec:
+  connection: openai
+  method: POST
+  path: /v1/embeddings
+  requestBody:
+    required: true
+    content:
+      application/json: {}
+  response:
+    content:
+      application/json: {}
+    headers: {}
+    successCodes:
+      - 200

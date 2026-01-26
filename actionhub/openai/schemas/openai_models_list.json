@@ -1,0 +1,11 @@
+{
+  "type": "function",
+  "function": {
+    "name": "openai_models_list",
+    "description": "List available models.",
+    "parameters": {
+      "type": "object",
+      "properties": {}
+    }
+  }
+}

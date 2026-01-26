@@ -1,0 +1,9 @@
+name: function-samples
+version: "0.1"
+functions:
+  - hello-python
+  - hello-bun
+verify:
+  function: hello-python
+  input:
+    name: ActionHub

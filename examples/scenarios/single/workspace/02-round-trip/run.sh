@@ -17,8 +17,9 @@ if [ ! -f "$CLI" ]; then
     exit 1
 fi
 
-# Ensure server is running (check actual backend port)
-if ! curl -s http://localhost:53000/health >/dev/null 2>&1; then
+# Ensure server is running
+AIONIX_API_BASE="${AIONIX_API_BASE:-http://127.0.0.1:53000}"
+if ! curl -s "${AIONIX_API_BASE%/}/health" >/dev/null 2>&1; then
     echo "❌ Server is not running"
     exit 1
 fi
