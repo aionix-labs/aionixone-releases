@@ -1,0 +1,20 @@
+{
+  "entry": "CallChild",
+  "steps": {
+    "CallChild": {
+      "type": "task",
+      "action": "trn:stepflow:default:workflow/__CHILD_WORKFLOW__:start",
+      "mode": "sync",
+      "await": true,
+      "parameters": {
+        "input": {
+          "payload": "hello"
+        }
+      },
+      "next": "Done"
+    },
+    "Done": {
+      "type": "succeed"
+    }
+  }
+}

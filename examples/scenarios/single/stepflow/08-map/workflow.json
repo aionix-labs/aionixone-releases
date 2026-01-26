@@ -1,0 +1,25 @@
+{
+  "entry": "ProcessItems",
+  "steps": {
+    "ProcessItems": {
+      "type": "map",
+      "items": "{% input.items %}",
+      "itemProcessor": {
+        "entry": "ProcessOne",
+        "steps": {
+          "ProcessOne": {
+            "type": "set",
+            "set": { "processed": true, "item": "{% input.item %}" },
+            "end": true
+          }
+        }
+      },
+      "next": "Done"
+    },
+    "Done": {
+      "type": "set",
+      "set": { "allDone": true },
+      "end": true
+    }
+  }
+}

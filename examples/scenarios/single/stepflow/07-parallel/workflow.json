@@ -1,0 +1,36 @@
+{
+  "entry": "ParallelTasks",
+  "steps": {
+    "ParallelTasks": {
+      "type": "parallel",
+      "branches": [
+        {
+          "entry": "Branch1Start",
+          "steps": {
+            "Branch1Start": {
+              "type": "set",
+              "set": { "branch": 1, "result": "done" },
+              "end": true
+            }
+          }
+        },
+        {
+          "entry": "Branch2Start",
+          "steps": {
+            "Branch2Start": {
+              "type": "set",
+              "set": { "branch": 2, "result": "done" },
+              "end": true
+            }
+          }
+        }
+      ],
+      "next": "MergeResults"
+    },
+    "MergeResults": {
+      "type": "set",
+      "set": { "merged": true },
+      "end": true
+    }
+  }
+}

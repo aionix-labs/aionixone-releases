@@ -1,0 +1,13 @@
+{
+  "entry": "Start",
+  "steps": {
+    "Start": {
+      "type": "set",
+      "set": { "init": true },
+      "next": "Success"
+    },
+    "Success": {
+      "type": "succeed"
+    }
+  }
+}

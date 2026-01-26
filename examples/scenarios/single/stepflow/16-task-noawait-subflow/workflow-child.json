@@ -1,0 +1,12 @@
+{
+  "entry": "ChildStart",
+  "steps": {
+    "ChildStart": {
+      "type": "set",
+      "set": {
+        "message": "child completed"
+      },
+      "end": true
+    }
+  }
+}

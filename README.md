@@ -114,6 +114,18 @@ This is the free Community Edition:
 
 See full details in [COMMUNITY_LIMITS.md](COMMUNITY_LIMITS.md).
 
+## Examples
+
+Community-friendly examples are included in `examples/` (the distributed
+scenarios are intentionally excluded for the single-binary edition).
+
+```
+examples/
+  common/
+  scenarios/
+  scripts/
+```
+
 ## Requirements
 
 - macOS 12+ (Apple Silicon) or Linux (x86_64)

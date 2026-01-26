@@ -1,0 +1,29 @@
+{
+  "entry": "CheckValue",
+  "steps": {
+    "CheckValue": {
+      "type": "router",
+      "routes": [
+        {
+          "condition": "{% input.value > 10 %}",
+          "next": "HighValue"
+        },
+        {
+          "condition": "{% input.value <= 10 %}",
+          "next": "LowValue"
+        }
+      ],
+      "default": "LowValue"
+    },
+    "HighValue": {
+      "type": "set",
+      "set": { "category": "high", "message": "Value is greater than 10" },
+      "end": true
+    },
+    "LowValue": {
+      "type": "set",
+      "set": { "category": "low", "message": "Value is 10 or less" },
+      "end": true
+    }
+  }
+}

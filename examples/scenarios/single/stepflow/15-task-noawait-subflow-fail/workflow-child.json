@@ -1,0 +1,9 @@
+{
+  "entry": "Start",
+  "steps": {
+    "Start": {
+      "type": "fail",
+      "error": "SubflowError"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+[package]
+name = "starter-wasm"
+version = "0.1.2"
+license = "Apache-2.0"
+edition = "2021"  # Using 2021 for simpler static mut handling in no_std WASM
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+# No dependencies - uses simple bump allocator for minimal WASM size
+
+[profile.release]
+lto = true
+opt-level = "s"

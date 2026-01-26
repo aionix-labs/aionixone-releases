@@ -1,0 +1,13 @@
+{
+  "entry": "Start",
+  "steps": {
+    "Start": {
+      "type": "set",
+      "set": {
+        "message": "{% 'Hello from Igniter' %}",
+        "value": 1
+      },
+      "end": true
+    }
+  }
+}

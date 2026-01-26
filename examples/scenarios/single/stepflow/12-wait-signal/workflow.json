@@ -1,0 +1,22 @@
+{
+  "entry": "Start",
+  "steps": {
+    "Start": {
+      "type": "set",
+      "set": { "status": "pending" },
+      "next": "AwaitApproval"
+    },
+    "AwaitApproval": {
+      "type": "waitSignal",
+      "signal": "approved",
+      "timeoutSeconds": 30,
+      "set": { "approved": "{% result.approved %}" },
+      "next": "Done"
+    },
+    "Done": {
+      "type": "set",
+      "set": { "status": "approved" },
+      "end": true
+    }
+  }
+}

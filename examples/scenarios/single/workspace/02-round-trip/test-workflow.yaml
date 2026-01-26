@@ -1,0 +1,13 @@
+entry: start
+steps:
+  start:
+    type: set
+    assign:
+      - message: "Hello from round-trip test"
+      - timestamp: ${now()}
+    next: end
+  end:
+    type: succeed
+    output:
+      result: ${message}
+      time: ${timestamp}

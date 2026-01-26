@@ -1,0 +1,15 @@
+{
+  "entry": "RunShell",
+  "steps": {
+    "RunShell": {
+      "type": "task",
+      "action": "trn:aionixfn:default:function/__FUNCTION_NAME__:invoke",
+      "mode": "sync",
+      "parameters": {
+        "operation": "greet",
+        "name": "Stepflow"
+      },
+      "end": true
+    }
+  }
+}

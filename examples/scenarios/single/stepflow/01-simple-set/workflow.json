@@ -1,0 +1,13 @@
+{
+  "entry": "Start",
+  "steps": {
+    "Start": {
+      "type": "set",
+      "set": {
+        "message": "{% 'Hello from Stepflow!' %}",
+        "value": 42
+      },
+      "end": true
+    }
+  }
+}

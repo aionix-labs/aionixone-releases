@@ -1,0 +1,22 @@
+{
+  "entry": "TaskWithRetry",
+  "steps": {
+    "TaskWithRetry": {
+      "type": "task",
+      "action": "trn:aionixfn:default:function/__FUNCTION_NAME__:invoke",
+      "mode": "sync",
+      "parameters": {
+        "operation": "fail"
+      },
+      "retry": [
+        {
+          "errorEquals": ["AionixFn_ExecutionFailed"],
+          "maxAttempts": 3,
+          "intervalSeconds": 1,
+          "backoffRate": 2.0
+        }
+      ],
+      "end": true
+    }
+  }
+}

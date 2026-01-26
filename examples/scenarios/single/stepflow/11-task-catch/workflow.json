@@ -1,0 +1,31 @@
+{
+  "entry": "RiskyTask",
+  "steps": {
+    "RiskyTask": {
+      "type": "task",
+      "action": "trn:aionixfn:default:function/__FUNCTION_NAME__:invoke",
+      "mode": "sync",
+      "parameters": {
+        "operation": "fail"
+      },
+      "catch": [
+        {
+          "errorCodes": ["AionixFn_ExecutionFailed"],
+          "next": "HandleError",
+          "set": { "caught": true }
+        }
+      ],
+      "next": "Success"
+    },
+    "HandleError": {
+      "type": "set",
+      "set": { "recovered": true, "message": "Error was caught and handled" },
+      "end": true
+    },
+    "Success": {
+      "type": "set",
+      "set": { "success": true },
+      "end": true
+    }
+  }
+}

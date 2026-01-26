@@ -1,0 +1,15 @@
+{
+  "entry": "Start",
+  "steps": {
+    "Start": {
+      "type": "set",
+      "set": { "init": true },
+      "next": "Fail"
+    },
+    "Fail": {
+      "type": "fail",
+      "error": "TestError",
+      "cause": "This is a test failure"
+    }
+  }
+}

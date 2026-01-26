@@ -1,0 +1,20 @@
+{
+  "entry": "Start",
+  "steps": {
+    "Start": {
+      "type": "set",
+      "set": { "status": "starting" },
+      "next": "Wait"
+    },
+    "Wait": {
+      "type": "wait",
+      "seconds": 2,
+      "next": "Done"
+    },
+    "Done": {
+      "type": "set",
+      "set": { "status": "completed" },
+      "end": true
+    }
+  }
+}

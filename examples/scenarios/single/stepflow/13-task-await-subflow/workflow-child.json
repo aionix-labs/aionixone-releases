@@ -1,0 +1,8 @@
+{
+  "entry": "Start",
+  "steps": {
+    "Start": {
+      "type": "succeed"
+    }
+  }
+}

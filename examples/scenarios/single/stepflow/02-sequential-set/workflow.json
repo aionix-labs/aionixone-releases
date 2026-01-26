@@ -1,0 +1,20 @@
+{
+  "entry": "Step1",
+  "steps": {
+    "Step1": {
+      "type": "set",
+      "set": { "step": 1, "data": "first" },
+      "next": "Step2"
+    },
+    "Step2": {
+      "type": "set",
+      "set": { "step": 2, "data": "second" },
+      "next": "Step3"
+    },
+    "Step3": {
+      "type": "set",
+      "set": { "step": 3, "data": "final" },
+      "end": true
+    }
+  }
+}
