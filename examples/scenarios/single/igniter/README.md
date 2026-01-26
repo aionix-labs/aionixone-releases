@@ -62,11 +62,6 @@ aio tr delete <type>/<name> [--force]
 | `webhook` | HTTP request | API integrations, external events |
 | `cron` | Schedule | Periodic tasks, batch jobs |
 | `delay` | Timer | One-shot delayed execution (used for manual fire in scenarios) |
-| `httppoll` | HTTP polling | Monitor external APIs |
-| `kafka` | Kafka topic | Stream processing |
-| `redis` | Redis pub/sub | Real-time messaging |
-| `postgres` | PostgreSQL LISTEN | Database events |
-| `filewatch` | File system | File arrival processing |
 
 ## Action Target Format
 
