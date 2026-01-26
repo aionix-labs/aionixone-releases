@@ -12,23 +12,16 @@ PERMITTED:
 - Create backups of the Software
 
 NOT PERMITTED:
-- Modify, adapt, or create derivative works
+- Modify, adapt, or create derivative works of the Software binary itself
 - Reverse engineer, decompile, or disassemble the Software
 - Remove or alter any proprietary notices
 - Redistribute, sublicense, or transfer the Software outside your organization
-- Use the Software to provide competing SaaS or hosted services
+- Use the Software to provide third-party hosted or managed services
+  where the Software is the primary value offered
 
 COMMUNITY EDITION LIMITS:
-- Agent profiles: 3
-- Toolsets: 3
-- Workflows: 2
-- Triggers: 5
-- Ingress routes: 2
-- OpenAct actions: 20
-- OpenAct connections: 5
-- Functions: 10
-- Tenants: 1
-- Distributed runners: Disabled
+Community edition is subject to resource and feature limits as documented in
+the official AionixOne Community Limits specification.
 
 For Professional or Enterprise licenses, contact: license@aionixone.com
 

@@ -112,6 +112,8 @@ This is the free Community Edition:
 | Tenants | 1 |
 | Distributed runners | Disabled |
 
+See full details in [COMMUNITY_LIMITS.md](COMMUNITY_LIMITS.md).
+
 ## Requirements
 
 - macOS 12+ (Apple Silicon) or Linux (x86_64)
