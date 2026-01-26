@@ -1,6 +1,6 @@
 # AionixOne Releases
 
-Official binary releases for AionixOne - a unified automation platform.
+Official community binary releases for AionixOne (single-binary aio).
 
 ## Quick Install
 
@@ -13,31 +13,19 @@ curl -fsSL https://raw.githubusercontent.com/aionix-labs/aionixone-releases/main
 Or manually:
 
 ```bash
-# Download
-curl -LO https://github.com/aionix-labs/aionixone-releases/releases/latest/download/aionix-darwin-arm64.tar.gz
-
-# Extract
-tar -xzf aionix-darwin-arm64.tar.gz
-cd aionix-darwin-arm64
-
-# Setup & Start
-./setup.sh
-./start.sh
+VERSION="community-v0.1.2"
+curl -LO "https://github.com/aionix-labs/aionixone-releases/releases/download/${VERSION}/aio-community-darwin-arm64.tar.gz"
+tar -xzf aio-community-darwin-arm64.tar.gz
+chmod +x aio
 ```
 
 ### Linux (x86_64)
 
 ```bash
-# Download
-curl -LO https://github.com/aionix-labs/aionixone-releases/releases/latest/download/aionix-linux-x86_64.tar.gz
-
-# Extract
-tar -xzf aionix-linux-x86_64.tar.gz
-cd aionix-linux-x86_64
-
-# Setup & Start
-./setup.sh
-./start.sh
+VERSION="community-v0.1.2"
+curl -LO "https://github.com/aionix-labs/aionixone-releases/releases/download/${VERSION}/aio-community-linux-x86_64.tar.gz"
+tar -xzf aio-community-linux-x86_64.tar.gz
+chmod +x aio
 ```
 
 ## Usage
@@ -45,38 +33,24 @@ cd aionix-linux-x86_64
 After installation:
 
 ```bash
-# Load environment (required for CLI)
-source .env
-
-# Use CLI
 aio --help
-aio fn list
-aio param list
-aio wf list
 ```
 
-## Package Contents
+## Start the server
 
+```bash
+# Bootstrap admin API key (run once)
+aio server --bootstrap-admin admin --db-mode sqlite --data-path "$HOME/.aionixone/data" --port 53000
+
+# Start server
+AIONIX_API_KEY="<key>" \
+aio server --db-mode sqlite --data-path "$HOME/.aionixone/data" --port 53000
+
+# Verify
+AIONIX_API_BASE="http://127.0.0.1:53000" \
+AIONIX_API_KEY="<key>" \
+aio status
 ```
-aionix-<platform>/
-├── bin/
-│   ├── aionix-server    # Server binary
-│   └── aio              # CLI binary
-├── setup.sh             # First time setup
-├── start.sh             # Start server
-├── stop.sh              # Stop server
-├── status.sh            # Check status
-└── README.md
-```
-
-## Scripts
-
-| Script | Description |
-|--------|-------------|
-| `setup.sh` | First time setup, creates admin API key |
-| `start.sh` | Start server in background |
-| `stop.sh` | Stop server |
-| `status.sh` | Check server status |
 
 ## Server
 
@@ -89,11 +63,16 @@ This is the free Community Edition:
 
 | Resource | Limit |
 |----------|-------|
-| Governed Objects | 25 |
+| Agent profiles | 3 |
+| Toolsets | 3 |
+| Workflows | 2 |
+| Triggers | 5 |
+| Ingress routes | 2 |
+| OpenAct actions | 20 |
+| OpenAct connections | 5 |
+| Functions | 10 |
 | Tenants | 1 |
-| Features | All enabled |
-
-Governed objects include: Functions, Triggers, Workflows, Connections, Secrets, Parameters.
+| Distributed runners | Disabled |
 
 ## Requirements
 
@@ -108,7 +87,7 @@ Governed objects include: Functions, Triggers, Workflows, Connections, Secrets, 
 If you see "cannot be opened because the developer cannot be verified":
 
 ```bash
-xattr -d com.apple.quarantine bin/aio bin/aionix-server
+xattr -d com.apple.quarantine aio
 ```
 
 ### Server won't start
@@ -124,9 +103,7 @@ cat data/server.log
 ### Reset everything
 
 ```bash
-./stop.sh
-rm -rf data .env .pid
-./setup.sh
+rm -rf "$HOME/.aionixone"
 ```
 
 ## Links
