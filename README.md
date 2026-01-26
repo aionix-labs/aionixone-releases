@@ -20,6 +20,11 @@ VERSION="community-v0.1.2"
 curl -LO "https://github.com/aionix-labs/aionixone-releases/releases/download/${VERSION}/aio-community-darwin-arm64.tar.gz"
 tar -xzf aio-community-darwin-arm64.tar.gz
 chmod +x aio
+
+# Optional: put aio on PATH (no sudo)
+mkdir -p ~/.local/bin
+mv ./aio ~/.local/bin/aio
+export PATH="$HOME/.local/bin:$PATH"
 ```
 
 ### Linux (x86_64)
@@ -29,6 +34,11 @@ VERSION="community-v0.1.2"
 curl -LO "https://github.com/aionix-labs/aionixone-releases/releases/download/${VERSION}/aio-community-linux-x86_64.tar.gz"
 tar -xzf aio-community-linux-x86_64.tar.gz
 chmod +x aio
+
+# Optional: put aio on PATH (no sudo)
+mkdir -p ~/.local/bin
+mv ./aio ~/.local/bin/aio
+export PATH="$HOME/.local/bin:$PATH"
 ```
 
 ## Usage
