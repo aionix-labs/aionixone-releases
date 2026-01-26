@@ -3,8 +3,8 @@
 # AionixOne Stop - Stop server
 # ============================================================================
 
-DIR="$(cd "$(dirname "$0")" && pwd)"
-PID_FILE="$DIR/.pid"
+BASE_DIR="${AIONIX_HOME:-$HOME/.aionixone}"
+PID_FILE="${AIONIX_PID_FILE:-$BASE_DIR/aio.pid}"
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'

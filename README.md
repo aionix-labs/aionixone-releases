@@ -83,6 +83,18 @@ aio status
 - **URL**: http://localhost:53000
 - **Health Check**: http://localhost:53000/health
 
+## Optional helper scripts
+
+If you cloned this repo, the helper scripts under `scripts/` work with the
+community single-binary and store state in `~/.aionixone`:
+
+```bash
+./scripts/setup.sh
+./scripts/start.sh
+./scripts/status.sh
+./scripts/stop.sh
+```
+
 ## Community Edition Limits
 
 This is the free Community Edition:

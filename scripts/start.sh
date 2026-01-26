@@ -3,11 +3,13 @@
 # AionixOne Start - Start server
 # ============================================================================
 
-DIR="$(cd "$(dirname "$0")" && pwd)"
-DATA_DIR="$DIR/data"
-LOG_FILE="$DATA_DIR/server.log"
-PID_FILE="$DIR/.pid"
-SERVER="$DIR/bin/aionix-server"
+BASE_DIR="${AIONIX_HOME:-$HOME/.aionixone}"
+DATA_DIR="${AIONIX_DATA_DIR:-$BASE_DIR/data}"
+LOG_FILE="${AIONIX_LOG_FILE:-$BASE_DIR/aio.log}"
+PID_FILE="${AIONIX_PID_FILE:-$BASE_DIR/aio.pid}"
+ENV_FILE="${AIONIX_ENV_FILE:-$BASE_DIR/env}"
+PORT="${AIONIX_PORT:-53000}"
+AIO_BIN="${AIO_BIN:-aio}"
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -20,27 +22,38 @@ if [ -f "$PID_FILE" ] && kill -0 "$(cat "$PID_FILE")" 2>/dev/null; then
     exit 0
 fi
 
-# Check binary
-if [ ! -f "$SERVER" ]; then
-    echo -e "${RED}Error: bin/aionix-server not found${NC}"
+if ! command -v "$AIO_BIN" >/dev/null 2>&1; then
+    echo -e "${RED}Error: aio not found in PATH${NC}"
+    exit 1
+fi
+
+# Load env if available
+if [ -f "$ENV_FILE" ]; then
+    # shellcheck disable=SC1090
+    source "$ENV_FILE"
+fi
+
+if [ -z "${AIONIX_API_KEY:-}" ]; then
+    echo -e "${RED}Error: AIONIX_API_KEY not set. Run scripts/setup.sh first.${NC}"
     exit 1
 fi
 
 # Ensure data directory exists
-mkdir -p "$DATA_DIR"
+mkdir -p "$BASE_DIR" "$DATA_DIR"
 
 echo -e "${YELLOW}Starting AionixOne server...${NC}"
 
 # Start server
-"$SERVER" --data-path "$DATA_DIR" > "$LOG_FILE" 2>&1 &
+AIONIX_API_KEY="$AIONIX_API_KEY" \
+"$AIO_BIN" server --db-mode sqlite --data-path "$DATA_DIR" --port "$PORT" > "$LOG_FILE" 2>&1 &
 echo $! > "$PID_FILE"
 
 # Wait for startup
 for i in {1..15}; do
-    if curl -s http://localhost:53000/health > /dev/null 2>&1; then
+    if curl -s "http://127.0.0.1:${PORT}/health" > /dev/null 2>&1; then
         echo -e "${GREEN}Server started!${NC}"
         echo "  PID: $(cat "$PID_FILE")"
-        echo "  URL: http://localhost:53000"
+        echo "  URL: http://127.0.0.1:${PORT}"
         echo "  Log: $LOG_FILE"
         exit 0
     fi
