@@ -10,6 +10,9 @@ Official community binary releases for AionixOne (single-binary aio).
 curl -fsSL https://raw.githubusercontent.com/aionix-labs/aionixone-releases/main/install.sh | bash
 ```
 
+The installer places `aio` in `~/.local/bin` and adds it to your PATH in
+`~/.zshrc` / `~/.bashrc` when missing. Open a new terminal after install.
+
 Or manually:
 
 ```bash
@@ -35,6 +38,19 @@ After installation:
 ```bash
 aio --help
 ```
+
+If `aio` is not found:
+
+```bash
+export PATH="$HOME/.local/bin:$PATH"
+```
+
+## Install Location
+
+Default install paths (override via env vars):
+
+- Binary: `~/.local/bin/aio` (`AIONIX_INSTALL_BIN_DIR`)
+- Data: `~/.aionixone/data` (`AIONIX_DATA_DIR`)
 
 ## Start the server
 
