@@ -23,18 +23,26 @@ else
     PROJECT_ROOT="$(cd "$(dirname "$SCRIPT_SOURCE")/../.." && pwd)"
 fi
 
-# Load .env file (for CLI path and other settings, NOT for API key)
+# Load optional env files (for CLI path and settings)
 ENV_FILE="${PROJECT_ROOT}/.env"
+AIONIX_HOME="${AIONIX_HOME:-$HOME/.aionixone}"
+AIONIX_ENV_FILE="${AIONIX_ENV_FILE:-$AIONIX_HOME/env}"
+
 if [ -f "$ENV_FILE" ]; then
     source "$ENV_FILE"
+fi
+if [ -f "$AIONIX_ENV_FILE" ]; then
+    # shellcheck disable=SC1090
+    source "$AIONIX_ENV_FILE"
 fi
 
 # CLI path (can be overridden via environment variable or .env)
 CLI="${CLI:-aio}"
 
 # Environment
-AIONIX_HOST="${AIONIX_HOST:-localhost}"
-AIONIX_PORT="${AIONIX_PORT:-53000}"
+DEFAULT_HOST="${AIONIX_HOST:-127.0.0.1}"
+DEFAULT_PORT="${AIONIX_PORT:-53000}"
+AIONIX_API_BASE="${AIONIX_API_BASE:-http://${DEFAULT_HOST}:${DEFAULT_PORT}}"
 KEEP_RESOURCES="${KEEP_RESOURCES:-false}"
 
 # ============================================================================
@@ -50,11 +58,13 @@ KEEP_RESOURCES="${KEEP_RESOURCES:-false}"
 # ============================================================================
 
 resolve_api_key() {
-    # 1. Prefer bootstrap file for local dev/tests unless explicitly disabled
-    local BOOTSTRAP_FILE="${PROJECT_ROOT}/data/.admin-api-key"
-    if [ -f "$BOOTSTRAP_FILE" ] && [ -z "${AIONIX_API_KEY_NO_BOOTSTRAP:-}" ]; then
-        export AIONIX_API_KEY="$(cat "$BOOTSTRAP_FILE")"
-        return 0
+    # 1. Prefer community env file (created by scripts/setup.sh) unless disabled
+    if [ -f "$AIONIX_ENV_FILE" ] && [ -z "${AIONIX_API_KEY_NO_BOOTSTRAP:-}" ]; then
+        # shellcheck disable=SC1090
+        source "$AIONIX_ENV_FILE"
+        if [ -n "${AIONIX_API_KEY:-}" ]; then
+            return 0
+        fi
     fi
 
     # 2. Check if already set via environment
@@ -131,13 +141,13 @@ check_cli_available() {
 }
 
 check_server_health() {
-    local url="http://${AIONIX_HOST}:${AIONIX_PORT}/health"
+    local url="${AIONIX_API_BASE%/}/health"
 
     if curl -sf "$url" > /dev/null 2>&1; then
-        success "aionix-server is healthy (port $AIONIX_PORT)"
+        success "server is healthy (${AIONIX_API_BASE})"
         return 0
     else
-        fail "aionix-server is not responding at $url"
+        fail "server is not responding at $url"
     fi
 }
 

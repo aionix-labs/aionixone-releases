@@ -21,16 +21,18 @@ echo ""
 # Find CLI
 CLI="${AIO_CLI:-aio}"
 if ! command -v "$CLI" &> /dev/null; then
-    CLI="./apps/aio-cli/target/release/aio"
+    print_fail "aio not found in PATH"
+    exit 1
 fi
 print_ok "CLI available: $CLI"
 
 # Health check
-if ! curl -sf http://localhost:53000/health > /dev/null 2>&1; then
-    print_fail "aionix-server is not healthy"
+AIONIX_API_BASE="${AIONIX_API_BASE:-http://127.0.0.1:53000}"
+if ! curl -sf "${AIONIX_API_BASE%/}/health" > /dev/null 2>&1; then
+    print_fail "server is not healthy"
     exit 1
 fi
-print_ok "aionix-server is healthy (port 53000)"
+print_ok "server is healthy (${AIONIX_API_BASE})"
 
 # Unique names
 TIMESTAMP=$(date +%s)

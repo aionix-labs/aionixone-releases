@@ -4,13 +4,17 @@ set -e
 echo "=== Workspace Export Test ==="
 echo ""
 
-# Use CLI from path (resolve to absolute path before cd)
-CLI=${CLI:-./apps/aio-cli/target/release/aio}
-CLI=$(cd "$(dirname "$CLI")" && pwd)/$(basename "$CLI")
+# Use CLI from PATH
+CLI=${CLI:-aio}
+if ! command -v "$CLI" >/dev/null 2>&1; then
+    echo "❌ aio not found in PATH"
+    exit 1
+fi
 
 # Ensure server is running
-if ! curl -s http://localhost:3000/health >/dev/null 2>&1; then
-    echo "❌ Server is not running. Start with: ./apps/aionix-server/target/release/aionix"
+AIONIX_API_BASE="${AIONIX_API_BASE:-http://127.0.0.1:53000}"
+if ! curl -s "${AIONIX_API_BASE%/}/health" >/dev/null 2>&1; then
+    echo "❌ Server is not running. Start with: aio server --db-mode sqlite --data-path ~/.aionixone/data --port 53000"
     exit 1
 fi
 

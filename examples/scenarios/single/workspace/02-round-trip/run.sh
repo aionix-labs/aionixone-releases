@@ -7,8 +7,11 @@ echo ""
 
 # Resolve CLI path and script directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_ROOT="$(cd "$SCRIPT_DIR/../../../../.." && pwd)"
-CLI=${CLI:-$PROJECT_ROOT/apps/aio-cli/target/release/aio}
+CLI=${CLI:-aio}
+if ! command -v "$CLI" >/dev/null 2>&1; then
+    echo "❌ aio not found in PATH"
+    exit 1
+fi
 if [ ! -f "$CLI" ]; then
     echo "❌ CLI not found at $CLI"
     exit 1

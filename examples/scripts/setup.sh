@@ -36,15 +36,15 @@ echo ""
 
 echo "Server:"
 
-AIONIX_PORT="${AIONIX_PORT:-53000}"
-SERVER_URL="http://${AIONIX_HOST:-localhost}:${AIONIX_PORT}/health"
+AIONIX_API_BASE="${AIONIX_API_BASE:-http://127.0.0.1:53000}"
+SERVER_URL="${AIONIX_API_BASE%/}/health"
 
 SERVER_HEALTHY=true
 
 if curl -sf "$SERVER_URL" > /dev/null 2>&1; then
-    printf "  ${GREEN}✓${NC} aionix-server (localhost:%s)\n" "$AIONIX_PORT"
+    printf "  ${GREEN}✓${NC} server (%s)\n" "$AIONIX_API_BASE"
 else
-    printf "  ${RED}✗${NC} aionix-server (localhost:%s) - not responding\n" "$AIONIX_PORT"
+    printf "  ${RED}✗${NC} server (%s) - not responding\n" "$AIONIX_API_BASE"
     SERVER_HEALTHY=false
 fi
 
@@ -66,7 +66,7 @@ else
     echo -e "Environment: ${YELLOW}Not Ready${NC}"
     echo ""
     echo "Server is not running. Start it with:"
-    echo "  ./scripts/start-server.sh"
+    echo "  ../scripts/start.sh"
 fi
 
 echo ""
