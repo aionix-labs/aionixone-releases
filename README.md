@@ -10,19 +10,42 @@ orchestration (Stepflow), action execution (OpenAct), serverless functions
 
 ```mermaid
 flowchart LR
-  A[aio CLI] --> B[AionixOne Server]
-  A --> C[Agent Runtime]
+  %% Entry
+  Ingress[Ingress / Gateway]
+  CLI[CLI / SDK]
+  API[aionix-server HTTP API]
 
-  B --> D[Stepflow]
-  B --> E[OpenAct]
-  B --> F[AionixFn]
-  B --> G[Igniter]
-  B --> H[ParamStore]
-  B --> I[CredVault]
-  B --> J[Ingress]
+  %% Orchestration
+  Stepflow[Stepflow<br/>Workflow Engine]
+  Igniter[Igniter<br/>Triggers]
 
-  C --> E
-  C --> F
+  %% Execution
+  OpenAct[OpenAct<br/>Connectors/Actions]
+  AionixFn[AionixFn<br/>Functions Runtime]
+  Agent[Agent<br/>LLM Runtime]
+
+  %% Foundation
+  CredVault[CredVault<br/>Secrets]
+  ParamStore[ParamStore<br/>Parameters]
+
+  %% Execution bus
+  Bus[Execution Bus<br/>TRN Router]
+
+  Ingress --> API
+  CLI --> API
+  API --> Stepflow
+  API --> Igniter
+  API --> Agent
+  Stepflow --> Bus
+  Igniter --> Bus
+  Agent --> Bus
+  Bus --> OpenAct
+  Bus --> AionixFn
+  OpenAct --> CredVault
+  OpenAct --> ParamStore
+  AionixFn --> CredVault
+  AionixFn --> ParamStore
+  Agent --> ParamStore
 ```
 
 ## Quick Install
